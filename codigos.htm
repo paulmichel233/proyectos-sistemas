@@ -1,0 +1,1069 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Untitled Document</title>
+
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+</script>
+<style type="text/css">
+<!--
+body {
+	background-color: #B7D8F0;
+}
+-->
+</style>
+<style>
+a.topMenu
+{
+	color: black;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 9pt;	text-decoration: none;
+	font-weight: bold;
+}
+a.topMenu:hover
+{
+	color: red;
+}
+a.subMenu
+{
+	color: black;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 9pt;
+	text-decoration: none;
+}
+a.subMenu:hover
+{
+	color: red;
+}
+a.Mail
+{
+	color: #FF6633;
+	font-family: Verdana, Arial, Helvetica;	font-size: 8pt;
+}
+a.Mail:hover
+{
+	text-decoration:none;
+}
+</style>
+
+<script type="text/javascript">
+var highlightcolor="FFFFD8"
+
+var ns6 = document.getElementById && !document.all
+var previous=''
+var eventobj
+
+//Regular expression to highlight only form elements
+var intended=/INPUT|TEXTAREA|SELECT|OPTION/
+
+//Function to check whether element clicked is form element
+function checkel(which)
+{
+	if ( which.style && intended.test(which.tagName) ) {
+		if (ns6 && eventobj.nodeType == 3)
+			eventobj = eventobj.parentNode.parentNode
+		return true
+	}
+	else
+		return false
+}
+
+//Function to highlight form element
+function highlight(e)
+{
+	eventobj = ns6 ? e.target : event.srcElement
+	
+	if (previous != '')
+	{
+		if (checkel(previous))
+			previous.style.backgroundColor=''
+			
+		previous = eventobj
+	
+		if (checkel(eventobj))
+			eventobj.style.backgroundColor=highlightcolor
+	}
+	else {
+		if (checkel(eventobj))
+			eventobj.style.backgroundColor=highlightcolor
+		previous = eventobj
+	}
+}
+
+</script>
+
+<script language="javascript">
+function checkemail(str) {
+	var r1 = new RegExp("(@.*@)|(\\.\\.)|(@\\.)|(^\\.)");
+  var r2 = new RegExp("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$");
+  var isOK = !r1.test(str) && r2.test(str);
+  if (!isOK)
+  	alert('Invalid Email!');
+  return isOK;
+ }
+</script>
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+function reverse(form) {
+text = "";
+str = form.revtext.value;
+for (i = 0; i <= str.length; i++)
+text = str.substring(i, i+1) + text;
+form.revtext.value = text;
+}
+//  End -->
+</script>
+
+<style>
+<!--
+.styling{
+background-color:black;
+color:lime;
+font: bold 15px MS Sans Serif;
+padding: 3px;
+}
+-->
+</style>
+</head>
+
+<!--" * 4 parts to this script, please read the instructions carefully
+//==========================================================================
+part 1. either place in head OR save this part as "content.js"
+=========================================================================
+-->
+<script>
+var left_corner_x =101; // x-coordinate of top left corner of dropdown menu 
+var left_corner_y = 45; // y-coordinate of top left corner of dropdown menu 
+var back_color = '#E6E6E6'; // the background color of dropdown menu 
+var border_color = 'black'; // the color of dropdown menu border
+var border_size  = '1'; // the width of dropdown menu border
+var menu_width   = '121'; // the width of dropdown menu 
+//// Don't change these parameters
+var delay  = 500; /////
+var active_layer_id = -1;  /////
+var on_layer_id  = -1;  /////
+var buff_id  = -1;  /////
+/// ----------------------------
+//Script developed by Alexey
+//for support visit http://www.geocities.com/menulite
+//submitted to A1 JavaScripts - www.a1javascripts.com
+// menu content; the dropdown menus themselfs between '' and items of every dropdown menu are diveded by |; 
+// 
+
+menu_content     = new Array ('<a href=http://www.geocities.com/menulite/ class=subMenu>Inglés</a> | <a href=http://menulite.narod.ru/ class=subMenu>ruso</a>',
+
+'<a href=/menulite/menu.css class=subMenu>CSS</a> | <a href=/menulite/menu.js class=subMenu>Funciones</a> | <a href=/menulite/content.js class=subMenu>Parámetros</a>',
+
+'<a href=/menulite/desc/ class=subMenu>Descripción</a> | <a href=/menulite/faq/ class=subMenu>FAQ</a>',
+
+'<a href=/menulite/info/ class=subMenu>Info scripts</a> | <a class=subMenu href=mailto:web.master@male.ru>Escríbeme</a>');
+
+</script>
+<!--
+===============================================================
+part 2: either place in head or save as "menu.css"
+===============================================================
+
+=====================================================
+part 3: either place in head or save as "menu.js"
+=====================================================
+-->
+<script>
+//Script developed by Alexey
+//for support visit http://www.geocities.com/menulite
+//submitted to A1 JavaScripts - www.a1javascripts.com
+// check browser version
+
+NS4 = (document.layers) ? 1 : 0;
+
+function layer_enter (id)
+{
+	on_layer_id = id;
+}
+
+function layer_exit (id)
+{
+	on_layer_id = - 1;
+	setTimeout ('hide('+ id +')', delay/5);
+}
+
+function menu_enter (id)
+{
+	if (buff_id >= 0)
+		hide (buff_id);
+	show (id);
+	active_layer_id = id;
+}
+
+function menu_exit (id)
+{
+	setTimeout ('hide('+ id +')', delay);
+	buff_id = active_layer_id;
+	active_layer_id = -1;
+}
+
+function show (id)
+
+{
+	if (!NS4)
+		document.all['Menu' + id].style.visibility = "visible";
+	else
+		document.layers[id].visibility = "visible";
+}
+
+function hide (id)
+
+{
+	if (active_layer_id != id && on_layer_id != id)
+	{
+		if (!NS4)
+			document.all['Menu' + id].style.visibility = "hidden";
+		else
+			document.layers[id].visibility = "hide";
+	}
+}
+
+
+
+function generate_layers ()
+
+{
+	for (i = 0; i < menu_content.length; i++)
+	{
+		if (!NS4)
+			layer_header = '<div id=Menu' + i +
+					   	   ' onMouseOver="layer_enter (' + i + ');" onMouseOut = "layer_exit (' + i + ');"' +
+				           ' style="visibility: hidden; position: absolute; left: ' + (left_corner_x + menu_width*i) +
+				           '; top: ' + left_corner_y + ';">';
+
+		else
+
+			layer_header = '<layer id=' + i +
+						   ' onMouseOver="layer_enter (' + i + ');" onMouseOut = "layer_exit (' + i + ');"' +
+						   ' visibility=hide left=' + (left_corner_x + menu_width*i) +
+						   ' top = ' + left_corner_y + '>';
+
+
+		layer_header += '<table width=' + menu_width + ' cellpadding=0 cellspacing=0 border=0>' +
+					    '<td bgcolor=' + border_color + '><table width=' + menu_width + ' cellpadding=3 ' +
+					    'cellspacing=' + border_size + ' border=0><td width=' + menu_width + ' bgcolor=' + back_color + '>';
+
+
+
+		elements = menu_content[i].split (/\s*\|\s*/);
+		layer_body = '';
+		for (j = 0; j < elements.length; j++)
+		{
+			layer_body += elements[j];	
+			if ((NS4 && j < elements.length - 1) || (!NS4 && j < elements.length - 1))
+				layer_body += '<hr width=' + (menu_width - 8) + ' size=1 color='+ border_color + '>';
+
+		}
+		layer_footer = '</td></table></td></table>';
+		if (!NS4)
+			layer_footer += '</div>';
+		else
+			layer_footer += '</layer>';
+		document.writeln (layer_header + layer_body + layer_footer);
+
+	}
+
+}
+
+generate_layers ();
+</script>
+</b>
+
+
+<body>
+<div id="Layer1" style="position:absolute; left:382px; top:12px; width:657px; height:95px; z-index:1">
+  <script type="text/javascript">
+ var msg = 'bienvenidos a mi codigos '
+ var colorTimer = null;
+
+ function toHex(n){
+ var hexChars = '0123456789ABCDEF';
+ if (n == 0) return n;
+ var j, k;
+ var temp = '';
+ while (n != 0){
+ j = n % 16;
+ n = (n - j)/16;
+ temp = hexChars.charAt(j) + temp;
+ }
+  return temp;
+ }
+ function colorize(){
+  if (!document.getElementById) return;
+  for (i=0; i<msg.length; i++){
+  k = Math.round(Math.random() * 16777215);
+  k = toHex(k);
+  while (k.length < 6){
+  k = k + '0';
+ } 
+  document.getElementById('colorizer' + i).style.color = '#' + k;
+ }
+  colorTimer = window.setTimeout('colorize()', 230);
+ }
+</script>
+
+<BODY onload='colorize();'>
+
+<div id="text" style="font-size:35px ; font-family: 'Times New Roman', Courier, monospace; letter-spacing:normal; font-weight:bold; font-style:normal; text-align:center; padding-top:15px;">
+<script>
+for (var i=0; i<msg.length; i++){
+ document.write("<span id ='colorizer" + i + "'>" + msg.charAt(i) + "</span>");
+}
+</script></div>
+</div> 
+<div id="Layer2" style="position:absolute; left:437px; top:105px; width:486px; height:32px; z-index:2">
+  <table BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="585">
+  <tr>
+    <td ALIGN="CENTER" VALIGN="CENTER" WIDTH="100" HEIGHT="20" BGCOLOR="#FFFFFF">Hey</td>
+    <td ALIGN="CENTER" VALIGN="CENTER" HEIGHT="20" BGCOLOR="#000000">
+    <table BORDER="0" CELLPADDING="0" WIDTH="485">
+      <tr>
+        <td ALIGN="CENTER" VALIGN="CENTER" WIDTH="120" HEIGHT="20" BGCOLOR="#FFFFFF">
+        <a href="/menulite/" onMouseOver="menu_enter (0);" onMouseOut="menu_exit (0);" class="topMenu">
+        Lenguajes</a></td>
+        <td ALIGN="CENTER" VALIGN="CENTER" WIDTH="120" BGCOLOR="#FFFFFF">
+        <a href="/menulite/" onMouseOver="menu_enter (1);" onMouseOut="menu_exit (1);" class="topMenu">
+        Descargas</a></td>
+        <td ALIGN="CENTER" VALIGN="CENTER" WIDTH="120" BGCOLOR="#FFFFFF">
+        <a href="/menulite/" onMouseOver="menu_enter (2);" onMouseOut="menu_exit (2);" class="topMenu">
+        Descripción</a></td>
+        <td ALIGN="CENTER" VALIGN="CENTER" WIDTH="120" BGCOLOR="#FFFFFF">
+        <a href="/menulite/" onMouseOver="menu_enter (3);" onMouseOut="menu_exit (3);" class="topMenu">
+        Info</a></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</div>
+
+<div id="Layer3" style="position:absolute; left:108px; top:160px; width:462px; height:222px; z-index:3">
+<FORM name="Keypad" action="">
+<TABLE>
+<B>
+<TABLE border=2 width=50 height=60 cellpadding=1 cellspacing=5>
+<TR>
+<TD colspan=3 align=middle>
+<input name="ReadOut" type="Text" size=24 value="0" width=100%>
+</TD>
+<TD
+</TD>
+<TD>
+<input name="btnClear" type="Button" value="  C  " onclick="Clear()">
+</TD>
+<TD><input name="btnClearEntry" type="Button" value="  CE " onclick="ClearEntry()">
+</TD>
+</TR>
+<TR>
+<TD>
+<input name="btnSeven" type="Button" value="  7  " onclick="NumPressed(7)">
+</TD>
+<TD>
+<input name="btnEight" type="Button" value="  8  " onclick="NumPressed(8)">
+</TD>
+<TD>
+<input name="btnNine" type="Button" value="  9  " onclick="NumPressed(9)">
+</TD>
+<TD>
+</TD>
+<TD>
+<input name="btnNeg" type="Button" value=" +/- " onclick="Neg()">
+</TD>
+<TD>
+<input name="btnPercent" type="Button" value="  % " onclick="Percent()">
+</TD>
+</TR>
+<TR>
+<TD>
+<input name="btnFour" type="Button" value="  4  " onclick="NumPressed(4)">
+</TD>
+<TD>
+<input name="btnFive" type="Button" value="  5  " onclick="NumPressed(5)">
+</TD>
+<TD>
+<input name="btnSix" type="Button" value="  6  " onclick="NumPressed(6)">
+</TD>
+<TD>
+</TD>
+<TD align=middle><input name="btnPlus" type="Button" value="  +  " onclick="Operation('+')">
+</TD>
+<TD align=middle><input name="btnMinus" type="Button" value="   -   " onclick="Operation('-')">
+</TD>
+</TR>
+<TR>
+<TD>
+<input name="btnOne" type="Button" value="  1  " onclick="NumPressed(1)">
+</TD>
+<TD>
+<input name="btnTwo" type="Button" value="  2  " onclick="NumPressed(2)">
+</TD>
+<TD>
+<input name="btnThree" type="Button" value="  3  " onclick="NumPressed(3)">
+</TD>
+<TD>
+</TD>
+<TD align=middle><input name="btnMultiply" type="Button" value="  *  " onclick="Operation('*')">
+</TD>
+<TD align=middle><input name="btnDivide" type="Button" value="   /   " onclick="Operation('/')">
+</TD>
+</TR>
+<TR>
+<TD>
+<input name="btnZero" type="Button" value="  0  " onclick="NumPressed(0)">
+</TD>
+<TD>
+<input name="btnDecimal" type="Button" value="   .  " onclick="Decimal()">
+</TD>
+<TD colspan=3>
+</TD>
+<TD>
+<input name="btnEquals" type="Button" value="  =  " onclick="Operation('=')">
+</TD>
+</TR>
+</TABLE>
+</TABLE>
+</B>
+</FORM>
+</CENTER>
+<font face="Verdana, Arial, Helvetica" size=2>
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+var FKeyPad = document.Keypad;
+var Accumulate = 0;
+var FlagNewNum = false;
+var PendingOp = "";
+function NumPressed (Num) {
+if (FlagNewNum) {
+FKeyPad.ReadOut.value  = Num;
+FlagNewNum = false;
+   }
+else {
+if (FKeyPad.ReadOut.value == "0")
+FKeyPad.ReadOut.value = Num;
+else
+FKeyPad.ReadOut.value += Num;
+   }
+}
+function Operation (Op) {
+var Readout = FKeyPad.ReadOut.value;
+if (FlagNewNum && PendingOp != "=");
+else
+{
+FlagNewNum = true;
+if ( '+' == PendingOp )
+Accumulate += parseFloat(Readout);
+else if ( '-' == PendingOp )
+Accumulate -= parseFloat(Readout);
+else if ( '/' == PendingOp )
+Accumulate /= parseFloat(Readout);
+else if ( '*' == PendingOp )
+Accumulate *= parseFloat(Readout);
+else
+Accumulate = parseFloat(Readout);
+FKeyPad.ReadOut.value = Accumulate;
+PendingOp = Op;
+   }
+}
+function Decimal () {
+var curReadOut = FKeyPad.ReadOut.value;
+if (FlagNewNum) {
+curReadOut = "0.";
+FlagNewNum = false;
+   }
+else
+{
+if (curReadOut.indexOf(".") == -1)
+curReadOut += ".";
+   }
+FKeyPad.ReadOut.value = curReadOut;
+}
+function ClearEntry () {
+FKeyPad.ReadOut.value = "0";
+FlagNewNum = true;
+}
+function Clear () {
+Accumulate = 0;
+PendingOp = "";
+ClearEntry();
+}
+function Neg () {
+FKeyPad.ReadOut.value = parseFloat(FKeyPad.ReadOut.value) * -1;
+}
+function Percent () {
+FKeyPad.ReadOut.value = (parseFloat(FKeyPad.ReadOut.value) / 100) * parseFloat(Accumulate);
+}
+// End -->
+</SCRIPT>
+</div>
+
+<div id="Layer4" style="position:absolute; left:501px; top:136px; width:459px; height:222px; z-index:4">
+<SCRIPT LANGUAGE="JavaScript">
+<!--  Begin
+function greeting() {
+var today = new Date();
+var hrs = today.getHours();
+document.writeln("<CENTER>");
+if ((hrs >=6) && (hrs <=18))
+{}
+else
+document.write("");
+document.writeln("<BR>");
+document.write("<H1>buen ");
+if (hrs < 6)
+document.write("día");
+else if (hrs < 12)
+document.write("día");
+else if (hrs <= 18)
+document.write("tarde");
+else
+document.write("Evening");
+document.writeln("!</H1>");
+document.write("entraste el ");
+dayStr = today.toLocaleString();
+document.write(dayStr);
+document.writeln("</CENTER>");
+}
+function montharr(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11)
+{
+this[0] = m0;
+this[1] = m1;
+this[2] = m2;
+this[3] = m3;
+this[4] = m4;
+this[5] = m5;
+this[6] = m6;
+this[7] = m7;
+this[8] = m8;
+this[9] = m9;
+this[10] = m10;
+this[11] = m11;
+}
+function calendar()
+{
+var monthNames = "eneFebMarAbrMayJunJulAgoSepOctNovDic";
+var today = new Date();
+var thisDay;
+var monthDays = new montharr(31, 28, 31, 30, 31, 30, 31, 31, 30,31, 30, 31);
+year = today.getYear() + 1900;
+thisDay = today.getDate();
+if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+monthDays[1] = 29;
+nDays = monthDays[today.getMonth()];
+firstDay = today;
+firstDay.setDate(1);
+testMe = firstDay.getDate();
+if (testMe == 2)
+firstDay.setDate(0);
+startDay = firstDay.getDay();
+document.writeln("<CENTER>");
+document.write("<TABLE BORDER>");
+document.write("<TR><TH COLSPAN=7>");
+document.write(monthNames.substring(today.getMonth() * 3,
+(today.getMonth() + 1) * 3));
+document.write(". ");
+document.write(year);
+document.write("<TR><TH>dom<TH>lun<TH>mar<TH>mie<TH>jue<TH>vie<TH>Sab");
+document.write("<TR>");
+column = 0;
+for (i=0; i<startDay; i++) {
+document.write("<TD width=30>");
+column++;
+}
+for (i=1; i<=nDays; i++) {
+document.write("<TD width=30>");
+if (i == thisDay)
+document.write("<FONT COLOR=\"#FF0000\">")
+document.write(i);
+if (i == thisDay)
+document.write("</FONT>")
+column++;
+if (column == 7) {
+document.write("<TR>");
+column = 0;
+}
+}
+document.write("</TABLE>");
+document.writeln("</CENTER>");
+}
+greeting();
+document.write("</br>");
+calendar();
+document.write("");
+// End -->
+</SCRIPT>
+</div>
+
+<div id="Layer5" style="position:absolute; left:989px; top:203px; width:411px; height:176px; z-index:5">
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+var message="   Welcome to my site !!! ";
+var spc=10;
+var speedisplay=50;
+var times=2;
+var rows=5;
+var cols=40;
+var stopbutton="yes"; // yes or no
+var stopbuttonvalue="                      STOP                          ";
+var startvalue="                      START                          ";
+var len=spc*2;
+var text=message;
+var i;
+var stop=false;
+var stoppedisplay;
+for (i=0;i<spc;i++) {
+text=text+" ";
+}
+function array(n) {
+this.length = n
+for (i=1; i <= n; i++) {
+this[i] ="";
+}
+return this;
+}
+document.writeln('<form name="F">')
+document.writeln('<textarea rows='+rows+' cols='+cols+' name="display" wrap=soft></textarea>')
+if (stopbutton == "yes") {
+document.writeln('<br><input type=button value="'+stopbuttonvalue+'" onClick="stopstart()" name=stopit>');
+}
+document.writeln('</form>')
+var l=text.length;
+var ll=message.length;
+var lb=new array(l)
+var lr=new array(spc*2+1)
+var lg=new array(ll)
+var lk=new array(ll)
+lb[0]=text;lb[l]=text;lr[0]=message;lg[0]=message;
+
+for (j=1;j<l;j++) {
+lb[j]=lb[j-1].substring(1, l)+lb[j-1].charAt(0);
+}
+lr[spc*2]=message;
+for (i=1;i<=spc;i++) {
+lr[i]=" "+lr[i-1]
+}
+for (i=spc*2-1;i>=spc+1;i--) {
+lr[i]=" "+lr[i+1]
+}
+var ll=message.length;
+for (j=1;j<ll;j++) {
+for (i=lg[j-1].length-2;i>=0;i--) {
+lg[j]=lg[j-1].charAt(i)+lg[j];
+   }
+}
+lk[ll]=message;
+for (j=ll-1;j>=0;j--) {
+lk[j]=lk[j+1].substring(1, l);
+}
+var lge="";
+var lbe="";
+var rle="";
+for (i=0;i<rows;i++) {
+lge=lge+lg[i]+unescape('%0D%0A');
+}
+for (i=0;i<rows;i++) {
+lbe=lbe+lb[l-i]+unescape('%0D%0A');
+}
+for (i=1;i<=rows;i++) {
+rle=rle+lr[spc*2-i]+unescape('%0D%0A');
+}
+var c=1;
+var i=ll;
+var j=0;
+var f=0;
+function lgf() {
+if(stop==false) {
+if(i>ll) {
+j=0;
+i=i-2;
+}
+if(i==0&&j==0) {
+c++;
+j=1;
+}
+if(j!=0) {
+document.F.display.value=lg[i]+unescape('%0D%0A')+document.F.display.value;
+i++;
+}
+if(j==0) {
+document.F.display.value=lg[i]+unescape('%0D%0A')+document.F.display.value;
+i--;
+}
+if(c<=times) {
+setTimeout("lgf()",speedisplay);
+}
+else {
+document.F.display.value=lge;
+i=0;
+j=0;
+c=0;
+t();
+      }
+   }
+}
+function t() {
+if(stop==false) {
+if(i>l) {i=1};
+document.F.display.value=lb[i]+unescape('%0D%0A')+document.F.display.value;
+i++;
+j++;
+if(j<=l*times) {
+setTimeout("t()",speedisplay)}else{document.F.display.value=lbe;
+i=0;
+j=0;
+rl();
+      }
+   }
+}
+function rl() {
+if (stop==false) {
+if(i>=spc*2) {i=0};
+document.F.display.value=lr[i]+unescape('%0D%0A')+document.F.display.value;
+i++;
+j++;
+if(j<len*times) {setTimeout("rl()",speedisplay)}else{document.F.display.value=rle;i=ll-1;j=0;trans()}
+}
+}
+function trans() {
+if(stop==false) {
+document.F.display.value=lk[i]+unescape('%0D%0A')+document.F.display.value;
+i--;
+if(i!=1) {
+setTimeout("trans()",speedisplay)
+}
+else {
+i=ll;
+lgf();
+      }
+   }
+}
+function stopstart() {
+stoppedisplay=stop;
+if(stoppedisplay==false) {
+stop=true;document.F.stopit.value=startvalue;
+}
+if(stoppedisplay==true) {
+stop=false;document.F.stopit.value=stopbuttonvalue;
+document.F.display.value="";
+i=11;
+j=0;
+c=0;
+lgf();
+   }
+}
+if (rows>spc||rows>ll) {
+alert("ERROR!\nrows can NOT be more that spaces or message length!!!!")
+}
+if (spc+ll>cols) {
+alert("ERROR!\ncols(coloums) can NOT be less that the message length + spacing length")
+}
+if (rows<=spc&&rows<=ll&&spc+ll<=cols) {
+lgf();
+}
+// End -->
+</script>
+</div>
+
+<div id="Layer6" style="position:absolute; left:68px; top:396px; width:437px; height:216px; z-index:6">
+ <form action="#" onclick="highlight(event)">
+<table border="0" cellspacing="2" cellpadding="2" align="center">
+    <tr> 
+      <td width="15%">Text 1: </td>
+      <td> 
+        <input type="text" size="40" maxlength="40">
+      </td>
+    </tr>
+    <tr> 
+      <td class="maintext">Text 2: </td>
+      <td> 
+        <input type="text" size="40" maxlength="40">
+      </td>
+    </tr>
+
+    <tr> 
+      <td align="left" valign="top">Text 3:</td>
+      <td> 
+        <textarea cols="40" rows="7"></textarea>
+      </td>
+    </tr>
+    <tr> 
+      <td>List:</td>
+      <td> 
+        <select name="select" size="1">
+          <option>Example List Item 1</option>
+          <option>Example List Item 2</option>
+          <option>Example List Item 3</option>
+          <option>Example List Item 4</option>
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="2" align="center">
+        <input type="submit" name="Submit" value="Submit">
+      </td>
+    </tr>
+  </table>
+</form>
+</div>
+
+<div id="Layer7" style="position:absolute; left:517px; top:497px; width:447px; height:75px; z-index:7">
+<center>
+<form method="post" action="#" onSubmit="return checkemail(this.email.value)">
+	<p>ingresa tu email : 
+		<input type="text" id="email">
+	</p>
+	<p> 
+		<input type="submit" id="submit" value="Submit">
+	</p>
+</form>
+</center>
+</div>
+
+<div id="Layer8" style="position:absolute; left:985px; top:516px; width:394px; height:47px; z-index:8">
+<center>
+<form>
+<input type=text name=revtext value=hello>
+<input type=button value="Reverse" onClick="reverse(this.form)">
+</form>
+</center>
+</div>
+
+<div id="Layer9" style="position:absolute; left:276px; top:734px; width:96px; height:30px; z-index:9">
+<span id="digitalclock" class="styling"></span>
+
+<script>
+<!--
+var alternate=0
+var standardbrowser=!document.all&&!document.getElementById
+
+if (standardbrowser)
+document.write('<form name="tick"><input type="text" name="tock" size="6"></form>')
+
+function show(){
+if (!standardbrowser)
+var clockobj=document.getElementById? document.getElementById("digitalclock") : document.all.digitalclock
+var Digital=new Date()
+var hours=Digital.getHours()
+var minutes=Digital.getMinutes()
+var dn="AM"
+
+if (hours==12) dn="PM" 
+if (hours>12){
+dn="PM"
+hours=hours-12
+}
+if (hours==0) hours=12
+if (hours.toString().length==1)
+hours="0"+hours
+if (minutes<=9)
+minutes="0"+minutes
+
+if (standardbrowser){
+if (alternate==0)
+document.tick.tock.value=hours+" : "+minutes+" "+dn
+else
+document.tick.tock.value=hours+"   "+minutes+" "+dn
+}
+else{
+if (alternate==0)
+clockobj.innerHTML=hours+"<font color='lime'> : </font>"+minutes+" "+"<sup style='font-size:1px'>"+dn+"</sup>"
+else
+clockobj.innerHTML=hours+"<font color='black'> : </font>"+minutes+" "+"<sup style='font-size:1px'>"+dn+"</sup>"
+}
+alternate=(alternate==0)? 1 : 0
+setTimeout("show()",1000)
+}
+window.onload=show
+
+//-->
+</script>
+</div>
+
+<div id="Layer10" style="position:absolute; left:984px; top:367px; width:394px; height:135px; z-index:10">
+<style>
+body
+{
+  background-color:#f2f2f2;
+  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+*
+{
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h5
+{
+  margin:0px;
+  font-size:1.4em;
+  font-weight:700;
+}
+
+p
+{
+  font-size:12px;
+}
+
+.center
+{
+  height:100vh;
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* End Non-Essential  */
+
+.property-card
+{
+  height:18em;
+  width:14em;
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -ms-flex-direction:column;
+  flex-direction:column;
+  position:relative;
+  -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius:16px;
+  overflow:hidden;
+  -webkit-box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+  box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+}
+/* ^-- The margin bottom is necessary for the drop shadow otherwise it gets clipped in certain cases. */
+
+/* Top Half of card, image. */
+
+.property-image
+{
+  height:6em;
+  width:14em;
+  padding:1em 2em;
+  position:Absolute;
+  top:0px;
+  -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  background-image:url('https://www.javascriptfreecode.com/uploads/pictures/10-what-is-landscape-photography.jpg');
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+/* Bottom Card Section */
+
+.property-description
+{
+  background-color: #FAFAFC;
+  height:12em;
+  width:14em;
+  position:absolute;
+  bottom:0em;
+  -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  padding: 0.5em 1em;
+  text-align:center;
+}
+
+/* Social Icons */
+
+.property-social-icons
+{
+  width:1em;
+  height:1em;
+  background-color:black;
+  position:absolute;
+  bottom:1em;
+  left:1em;
+  -webkit-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Property Cards Hover States */
+
+.property-card:hover .property-description
+{
+  height:0em;
+  padding:0px 1em;
+}
+.property-card:hover .property-image
+{
+  height:18em;
+}
+
+.property-card:hover .property-social-icons
+{
+  background-color:white;
+}
+
+.property-card:hover .property-social-icons:hover
+{
+  background-color:blue;
+  cursor:pointer;
+}
+
+
+/* Optional
+
+.property-image-title
+{
+text-align:center;
+position:Relative;
+top:30%;
+opacity:0;
+transition:all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s;
+color:black;
+font-size:1.2em;
+}
+
+.property-card:hover .property-image-title
+{
+opacity:1;
+}
+
+*/
+</style>
+
+<div class="center">
+<div class="property-card">
+<a href="#">
+<div class="property-image">
+<div class="property-image-title">
+
+</div>
+</div></a>
+<div class="property-description">
+<h5> un paisaje hermoso </h5>
+<p>Lorem Ipsum Dipsum hortata. Mixcall Horcho. Mixwell Chingo. More Bingo. Lorem Ipum doth be hard.</p>
+</div>
+<a href="#">
+<div class="property-social-icons">
+</div>
+</a>
+</div>
+ </div>
+</div>
+</body>
+</html>
